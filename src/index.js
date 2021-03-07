@@ -16,44 +16,56 @@ module.exports = twitterGetUrl = (url_media) =>{
             }
         }
         axios.post(url, qs.stringify(requestBody), config).then(result => {
-            let $ = cheerio.load(result.data), videoUrl = [], imageUrl = null, resposta = {}
+            let $ = cheerio.load(result.data), videoUrl = [], imageUrl = null, response = {}
+            //GETTING VIDEO/GIF LINKS
             $('div.result_overlay > a').each((i, element) => {
                 let cheerioElement = $(element)
-                let videoDimensions = cheerioElement.attr("href").split("/")[7].split("x")
-                videoUrl.push({
-                    width: videoDimensions[0],
-                    height: videoDimensions[1],
-                    dimension: videoDimensions.join("x"),
-                    url: cheerioElement.attr("href")
-                })
+                let videoDimensions = cheerioElement.attr("href").split("/")[7]
+                let videoWidth = (videoDimensions != undefined) ? videoDimensions.split("x")[0] : null
+                let videoHeight = (videoDimensions != undefined) ? videoDimensions.split("x")[1] : null
+                if(videoDimensions == undefined){
+                    videoUrl.push({
+                        width: null,
+                        height: null,
+                        dimensions : null,
+                        url: cheerioElement.attr("href")
+                    })
+                } else {
+                    videoUrl.push({
+                        width: videoWidth,
+                        height: videoHeight,
+                        dimension: videoDimensions,
+                        url: cheerioElement.attr("href")
+                    })
+                }
             })
-
+            //GETTING IMAGE LINKS
             if(videoUrl.length == 0){
                 $('div.result_overlay > img').each((i, element) => {
                     let cheerioElement = $(element)
                     imageUrl = (cheerioElement.attr("src") != "/images/no_thumb.png") ? cheerioElement.attr("src") : null
                 })
             }
-
+            //RESULTS OUTPUT
             if(imageUrl == null && videoUrl.length == 0){
-                resposta = {
+                response = {
                     found: false
                 }
             } else if(imageUrl == null){
-                resposta = {
+                response = {
                     found: true,
                     type: "video",
                     dimensionsAvailable: videoUrl.length,
                     download: videoUrl
                 }
             } else if (videoUrl.length == 0){
-                resposta = {
+                response = {
                     found: true,
                     type: "image",
                     download: imageUrl
                 }
             }
-            resolve(resposta)
+            resolve(response)
         }).catch((err) => {
             reject(err)
         })

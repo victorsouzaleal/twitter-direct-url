@@ -29,7 +29,7 @@ let response = await twitterGetUrl("https://twitter.com/VideosDoSeuDia/status/13
 console.log(response)
 ```
 
-## Output Exemple - Video
+## Output Exemple - Video Tweet
 ```
 {
     found: true,
@@ -58,7 +58,24 @@ console.log(response)
 }
 ```
 
-## Output Exemple - Image
+## Output Exemple - GIF Tweet
+```
+{
+    found: true,
+    type: "video",
+    dimensionsAvailable: 1,
+    download: [
+         {
+            width: null,
+            height: null,
+            dimension: null,
+            url: 'https://video.twimg.com/tweet_video/EkkF8BfWMAADGiN.mp4'
+        },
+    ]
+}
+```
+
+## Output Exemple - Image Tweet
 ```
 {
     found: true,
@@ -67,7 +84,7 @@ console.log(response)
 }
 ```
 
-## Output Exemple - Not Found Video/Image
+## Output Exemple - Not Found Video/Image Tweet
 ```
 {
     found: false,
