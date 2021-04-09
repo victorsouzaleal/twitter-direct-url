@@ -29,7 +29,7 @@ let response = await twitterGetUrl("https://twitter.com/VideosDoSeuDia/status/13
 console.log(response)
 ```
 
-## Output Exemple - Video Tweet
+## Output Example - Video Tweet
 ```
 {
     found: true,
@@ -58,7 +58,7 @@ console.log(response)
 }
 ```
 
-## Output Exemple - GIF Tweet
+## Output Example - GIF Tweet
 ```
 {
     found: true,
@@ -75,7 +75,7 @@ console.log(response)
 }
 ```
 
-## Output Exemple - Image Tweet
+## Output Example - Image Tweet
 ```
 {
     found: true,
