@@ -40,14 +40,14 @@ module.exports = twitterGetUrl = (url_media) =>{
                 }
             })
             //GETTING IMAGE LINKS
-            if(videoUrl.length == 0){
+            if(videoUrl[0].url == '/'){
                 $('div.result_overlay > img').each((i, element) => {
                     let cheerioElement = $(element)
                     imageUrl = (cheerioElement.attr("src") != "/images/no_thumb.png") ? cheerioElement.attr("src") : null
                 })
             }
             //RESULTS OUTPUT
-            if(imageUrl == null && videoUrl.length == 0){
+            if(imageUrl == null && videoUrl[0].url == '/'){
                 response = {
                     found: false
                 }
@@ -58,7 +58,7 @@ module.exports = twitterGetUrl = (url_media) =>{
                     dimensionsAvailable: videoUrl.length,
                     download: videoUrl
                 }
-            } else if (videoUrl.length == 0){
+            } else if (videoUrl[0].url == '/'){
                 response = {
                     found: true,
                     type: "image",
