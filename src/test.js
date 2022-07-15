@@ -6,61 +6,61 @@ async function test(url){
 }
 
 //Test Image URL
-test("https://twitter.com/0XMURADX0/status/1367883669105479683").then(result=>{
-    console.log({
+test("https://twitter.com/CATBRAINCELL/status/1547947201657049089").then(result=>{
+    console.dir({
         test: "Image Test",
         status: "success",
         result
-    })
+    }, {depth:null})
 }).catch((err)=>{
-    console.log({
+    console.dir({
         test: "Image Test",
         status: "error",
         result: err.message
-    })
+    }, {depth:null})
 })
 
 //Test Video URL
-test("https://twitter.com/OnePiece_Screen/status/1363152365898117125").then(result=>{
+test("https://twitter.com/TweetsOfCats/status/1547778899534172160").then(result=>{
     console.dir({
         test: "Video Test",
         status: "success",
         result
     },{depth: null})
 }).catch((err)=>{
-    console.log({
+    console.dir({
         test: "Video Test",
         status: "error",
         result: err.message
-    })
+    }, {depth:null})
 })
 
 //Test GIF URL
-test("https://twitter.com/0XMURADX0/status/1317591100480258048").then(result=>{
+test("https://twitter.com/Victorsouzaleal/status/1547970593005322241").then(result=>{
     console.dir({
         test: "GIF Test",
         status: "success",
         result
     }, {depth: null})
 }).catch((err)=>{
-    console.log({
+    console.dir({
         test: "GIF Test",
         status: "error",
         result: err.message
-    })
+    }, {depth:null})
 })
 
 //Test NOT FOUND URL
 test("https://twitter.com/_nbkrd/status/1368315217756909575").then(result=>{
-    console.log({
+    console.dir({
         test: "Not Found Test",
         status: "success",
         result
-    })
+    }, {depth:null})
 }).catch((err)=>{
-    console.log({
+    console.dir({
         test: "Not Found Test",
         status: "error",
         result: err.message
-    })
+    }, {depth: null})
 })

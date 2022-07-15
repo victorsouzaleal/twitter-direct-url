@@ -7,6 +7,7 @@ module.exports = twitterGetUrl = (url_media) =>{
         var url = url_media.replace("twitter", "ssstwitter")
         const requestBody = {
             id: url_media,
+            locale: "pt",
             tt: "48277062996429953dc378d8675febbc",
             ts: 1614856639
         }
@@ -16,53 +17,45 @@ module.exports = twitterGetUrl = (url_media) =>{
             }
         }
         axios.post(url, qs.stringify(requestBody), config).then(result => {
-            let $ = cheerio.load(result.data), videoUrl = [], imageUrl = null, response = {}
-            //GETTING VIDEO/GIF LINKS
-            $('div.result_overlay > a').each((i, element) => {
-                let cheerioElement = $(element)
-                let videoDimensions = cheerioElement.attr("href").split("/")[7]
-                let videoWidth = (videoDimensions != undefined) ? videoDimensions.split("x")[0] : null
-                let videoHeight = (videoDimensions != undefined) ? videoDimensions.split("x")[1] : null
-                if(videoDimensions == undefined){
-                    videoUrl.push({
-                        width: null,
-                        height: null,
-                        dimensions : null,
-                        url: cheerioElement.attr("href")
-                    })
-                } else {
+            let $ = cheerio.load(result.data), videoUrl = [], imageUrl = null, response = {}, type = null
+
+            //CHECK FILE TYPE
+            if($('div.result_overlay > img').length != 0){
+                type = $('div.result_overlay').text().includes("Oops! It seems that this tweet doesn't have a video!") ? "image" : "video/gif"
+            }
+
+            if(type == "video/gif"){
+                $('div.result_overlay > a').each((i, element) => {
+                    let cheerioElement = $(element)
+                    let videoDimensions = cheerioElement.text().split(" ")[1].includes("x") ? cheerioElement.text().split(" ")[1] : null
+                    let videoWidth = (videoDimensions != undefined) ? videoDimensions.split("x")[0] : null
+                    let videoHeight = (videoDimensions != undefined) ? videoDimensions.split("x")[1] : null
                     videoUrl.push({
                         width: videoWidth,
                         height: videoHeight,
                         dimension: videoDimensions,
-                        url: cheerioElement.attr("href")
+                        url: cheerioElement.attr("href").includes("https://video.twimg.com") ? cheerioElement.attr("href") : `https://ssstwitter.com${cheerioElement.attr("href")}`
                     })
+                })
+                response = {
+                    found: true,
+                    type: "video/gif",
+                    dimensionsAvailable: videoUrl.length,
+                    download: videoUrl
                 }
-            })
-            //GETTING IMAGE LINKS
-            if(videoUrl.length == 0){
+            } else if (type == "image"){
                 $('div.result_overlay > img').each((i, element) => {
                     let cheerioElement = $(element)
                     imageUrl = (cheerioElement.attr("src") != "/images/no_thumb.png") ? cheerioElement.attr("src") : null
                 })
-            }
-            //RESULTS OUTPUT
-            if(imageUrl == null && videoUrl.length == 0){
-                response = {
-                    found: false
-                }
-            } else if(imageUrl == null){
-                response = {
-                    found: true,
-                    type: "video",
-                    dimensionsAvailable: videoUrl.length,
-                    download: videoUrl
-                }
-            } else if (videoUrl.length == 0){
                 response = {
                     found: true,
                     type: "image",
                     download: imageUrl
+                }
+            } else {
+                response = {
+                    found: false
                 }
             }
             resolve(response)
