@@ -29,11 +29,11 @@ let response = await twitterGetUrl("https://twitter.com/VideosDoSeuDia/status/13
 console.log(response)
 ```
 
-## Output Example - Video Tweet
+## Output Example - Video/Gif Tweet
 ```
 {
     found: true,
-    type: "video",
+    type: "video/gif",
     dimensionsAvailable: 3,
     download: [
          {
@@ -54,23 +54,6 @@ console.log(response)
             dimension: '720x720',
             url: 'https://video.twimg.com/ext_tw_video/1367431274021928962/pu/vid/720x720/jQpjRIlF03JxfgwD.mp4?tag=10'
         }
-    ]
-}
-```
-
-## Output Example - GIF Tweet
-```
-{
-    found: true,
-    type: "video",
-    dimensionsAvailable: 1,
-    download: [
-         {
-            width: null,
-            height: null,
-            dimension: null,
-            url: 'https://video.twimg.com/tweet_video/EkkF8BfWMAADGiN.mp4'
-        },
     ]
 }
 ```
