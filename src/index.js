@@ -5,18 +5,7 @@ module.exports = twitterGetUrl = (url_media) =>{
         twitter_url_array[5] = twitter_url_array[5].split("?")[0]
         url_media = twitter_url_array.join("/")
         var url = url_media.replace("twitter", "ssstwitter")
-        const requestBody = {
-            id: url_media,
-            locale: "pt",
-            tt: "48277062996429953dc378d8675febbc",
-            ts: 1614856639
-        }
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-        axios.post(url, qs.stringify(requestBody), config).then(result => {
+        axios.post(url).then(result => {
             let $ = cheerio.load(result.data), videoUrl = [], imageUrl = null, response = {}, type = null
 
             //CHECK FILE TYPE
