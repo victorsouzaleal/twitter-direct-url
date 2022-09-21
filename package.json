@@ -1,6 +1,6 @@
 {
   "name": "twitter-url-direct",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Get Twitter direct url from Tweet media link",
   "main": "src/index.js",
   "scripts": {
