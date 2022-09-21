@@ -5,25 +5,15 @@ module.exports = twitterGetUrl = (url_media) =>{
         twitter_url_array[5] = twitter_url_array[5].split("?")[0]
         url_media = twitter_url_array.join("/")
         var url = url_media.replace("twitter", "ssstwitter")
-        const requestBody = {
-            id: url_media,
-            locale: "pt",
-            tt: "48277062996429953dc378d8675febbc",
-            ts: 1614856639
-        }
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-        axios.post(url, qs.stringify(requestBody), config).then(result => {
+        axios({
+            method: "post",
+            url
+        }).then(result =>{
             let $ = cheerio.load(result.data), videoUrl = [], imageUrl = null, response = {}, type = null
-
             //CHECK FILE TYPE
             if($('div.result_overlay > img').length != 0){
                 type = $('div.result_overlay').text().includes("Oops! It seems that this tweet doesn't have a video!") ? "image" : "video/gif"
             }
-
             if(type == "video/gif"){
                 $('div.result_overlay > a').each((i, element) => {
                     let cheerioElement = $(element)
@@ -34,7 +24,7 @@ module.exports = twitterGetUrl = (url_media) =>{
                         width: videoWidth,
                         height: videoHeight,
                         dimension: videoDimensions,
-                        url: cheerioElement.attr("href").includes("https://video.twimg.com") ? cheerioElement.attr("href") : `https://ssstwitter.com${cheerioElement.attr("href")}`
+                        url: cheerioElement.attr("href").includes("https://video.twimg.com") ? cheerioElement.attr("href") : `${cheerioElement.attr("href")}`
                     })
                 })
                 response = {
@@ -59,7 +49,7 @@ module.exports = twitterGetUrl = (url_media) =>{
                 }
             }
             resolve(response)
-        }).catch((err) => {
+        }).catch(err =>{
             reject(err)
         })
     })
