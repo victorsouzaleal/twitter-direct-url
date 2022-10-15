@@ -16,7 +16,7 @@ test("https://twitter.com/CATBRAINCELL/status/1547947201657049089").then(result=
     console.dir({
         test: "Image Test",
         status: "error",
-        result: err.message
+        result: err
     }, {depth:null})
 })
 
@@ -31,7 +31,7 @@ test("https://twitter.com/TweetsOfCats/status/1547778899534172160").then(result=
     console.dir({
         test: "Video Test",
         status: "error",
-        result: err.message
+        result: err
     }, {depth:null})
 })
 
@@ -46,7 +46,7 @@ test("https://twitter.com/Victorsouzaleal/status/1547970593005322241").then(resu
     console.dir({
         test: "GIF Test",
         status: "error",
-        result: err.message
+        result: err
     }, {depth:null})
 })
 
@@ -61,6 +61,6 @@ test("https://twitter.com/_nbkrd/status/1368315217756909575").then(result=>{
     console.dir({
         test: "Not Found Test",
         status: "error",
-        result: err.message
+        result: err
     }, {depth: null})
 })

@@ -33,27 +33,22 @@ console.log(response)
 ```
 {
     found: true,
-    type: "video/gif",
-    dimensionsAvailable: 3,
+    type: 'video/gif',
+    duration: 5.725,
+    dimensionsAvailable: 2,
     download: [
-         {
-            width: '480',
-            height: '480',
-            dimension: '480x480',
-            url: 'https://video.twimg.com/ext_tw_video/1367431274021928962/pu/vid/480x480/Mci5Lz4vRDtmGMCM.mp4?tag=10'
-        },
-        {
-            width: '320',
-            height: '320',
-            dimension: '320x320',
-            url: 'https://video.twimg.com/ext_tw_video/1367431274021928962/pu/vid/320x320/EBqdjRZKrUDG1Q_Q.mp4?tag=10'
-        },
-        {
-            width: '720',
-            height: '720',
-            dimension: '720x720',
-            url: 'https://video.twimg.com/ext_tw_video/1367431274021928962/pu/vid/720x720/jQpjRIlF03JxfgwD.mp4?tag=10'
-        }
+      {
+        witdh: '320',
+        height: '566',
+        dimension: '320x566',
+        url: 'https://video.twimg.com/ext_tw_video/1547778885449707520/pu/vid/320x566/ZRiUXOvgiaYmC8tg.mp4?tag=12'
+      },
+      {
+        witdh: '406',
+        height: '720',
+        dimension: '406x720',
+        url: 'https://video.twimg.com/ext_tw_video/1547778885449707520/pu/vid/406x720/XuStSsCDx6NWjQeq.mp4?tag=12'
+      }
     ]
 }
 ```
@@ -67,9 +62,10 @@ console.log(response)
 }
 ```
 
-## Output Exemple - Not Found Video/Image Tweet
+## Output Example - Not Found Video/Image Tweet
 ```
 {
     found: false,
+    error: "Request failed with status code 404 or other messages"
 }
 ```
