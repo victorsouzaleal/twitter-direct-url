@@ -33,6 +33,11 @@ console.log(response)
 ```
 {
     found: true,
+    tweet_user: {
+      name: 'Tweets of Cats',
+      username: 'TweetsOfCats',
+      text: 'https://t.co/3kKcSzCZvG'
+    },
     type: 'video/gif',
     duration: 5.725,
     dimensionsAvailable: 2,
@@ -57,6 +62,11 @@ console.log(response)
 ```
 {
     found: true,
+    tweet_user: {
+      name: 'cats who share one braincell',
+      username: 'CATBRAINCELL',
+      text: 'I drew a little bee kitty, instead of buzzing it purrs https://t.co/eCqxkvty98'
+    },
     type: "image",
     download: "https://pbs.twimg.com/media/EvpS9B9WgAoim8w.jpg"
 }

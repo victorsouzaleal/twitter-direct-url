@@ -11,6 +11,11 @@ module.exports = twitterGetUrl = (url_media) =>{
             if(res.data.media[0].type == "photo"){
                 response = {
                     found : true,
+                    tweet_user: {
+                        name: res.data.name,
+                        username: res.data.username,
+                        text: res.data.text
+                    },
                     type: "image",
                     download: res.data.media[0].url
                 }
@@ -18,11 +23,21 @@ module.exports = twitterGetUrl = (url_media) =>{
             } else if ((res.data.media[0].type == "animated_gif") || (res.data.media[0].type == "video")){
                 //GET DOWNLOAD LINKS
                 let type_media = res.data.media[0].type
+                let info = {
+                    name: res.data.name,
+                    username: res.data.username,
+                    text: res.data.text
+                }
                 axios({
                     url : `${BASE_URL}/${TWEET_ID}/video`
                 }).then((res)=>{
                     response = {
                         found : true,
+                        tweet_user: {
+                            name: info.name,
+                            username: info.username,
+                            text: info.text
+                        },
                         type: "video/gif",
                         duration: (type_media == "animated_gif") ? null : res.data.duration/1000,
                         dimensionsAvailable: res.data.variants.length,
