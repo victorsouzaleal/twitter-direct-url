@@ -44,11 +44,12 @@ module.exports = twitterGetUrl = (url_media) =>{
                         download: []
                     }
                     res.data.variants.forEach(variant => {
+                        let dimension = (type_media == "animated_gif") ? null : /[0-9]+x[0-9]+/.exec(variant.url).toString()
                         response.download.push({
-                            witdh: (type_media == "animated_gif") ? null : variant.url.split("/")[7].split("x")[0],
-                            height: (type_media == "animated_gif") ? null : variant.url.split("/")[7].split("x")[1],
-                            dimension: (type_media == "animated_gif") ? null : variant.url.split("/")[7],
-                            url : variant.url
+                            width: (type_media == "animated_gif") ? null : dimension.split('x')[0],
+                            height: (type_media == "animated_gif") ? null : dimension.split("x")[1],
+                            dimension: dimension,
+                            url: variant.url
                         })
                     })
                     resolve(response)
