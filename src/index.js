@@ -45,9 +45,9 @@ module.exports = twitterGetUrl = (url_media) =>{
                     }
                     res.data.variants.forEach(variant => {
                         response.download.push({
-                            witdh: (type_media == "animated_gif") ? null : variant.url.split("/")[7].split("x")[0],
-                            height: (type_media == "animated_gif") ? null : variant.url.split("/")[7].split("x")[1],
-                            dimension: (type_media == "animated_gif") ? null : variant.url.split("/")[7],
+                            witdh: (type_media == "animated_gif") ? null : variant.url.match(/\/[0-9]+x[0-9]+\//gmi)[0].match(/[0-9]+x[0-9]+/gmi)[0].split("x")[0],
+                            height: (type_media == "animated_gif") ? null : variant.url.match(/\/[0-9]+x[0-9]+\//gmi)[0].match(/[0-9]+x[0-9]+/gmi)[0].split("x")[1],
+                            dimension: (type_media == "animated_gif") ? null : variant.url.match(/\/[0-9]+x[0-9]+\//gmi)[0].match(/[0-9]+x[0-9]+/gmi)[0],
                             url : variant.url
                         })
                     })
