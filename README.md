@@ -25,7 +25,7 @@
 ## Example
 ```js
 const twitterGetUrl = require("twitter-url-direct")
-let response = await twitterGetUrl("https://twitter.com/TweetsOfCats/status/1547778899534172160")
+let response = await twitterGetUrl("https://twitter.com/papajuiceman/status/1532425868521394178")
 console.log(response)
 ```
 

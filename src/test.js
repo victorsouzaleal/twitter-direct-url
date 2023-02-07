@@ -21,7 +21,7 @@ test("https://twitter.com/CATBRAINCELL/status/1547947201657049089").then(result=
 })
 
 //Test Video URL
-test("https://twitter.com/TweetsOfCats/status/1547778899534172160").then(result=>{
+test("https://twitter.com/papajuiceman/status/1532425868521394178").then(result=>{
     console.dir({
         test: "Video Test",
         status: "success",
